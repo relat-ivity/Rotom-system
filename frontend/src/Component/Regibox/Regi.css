@@ -1,0 +1,11 @@
+.regiform{
+    float: left;
+    margin-top: 60px;
+    border-left-style: solid;
+    border-width: 1px;
+    padding-left: 30px;
+    padding-top: 20px;
+    width: 378px;
+    text-align: left;
+    overflow: hidden;
+}
