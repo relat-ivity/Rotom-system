@@ -50,10 +50,22 @@ const Regi = () => {
 
                     <Form.Item
                         label="确认密码"
-                        name="password"
+                        name="password, again"
                         rules={[{ required: true, message: '请输入密码!' }]}
                     >
                         <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="手机号"
+                        name="phonenumber"
+                        rules={[{ required: true, message: '请输入手机号!' },{
+                            required: false,
+                            pattern: new RegExp(/^1(3|4|5|6|7|8|9)\d{9}$/, "g"),
+                            message: '请输入正确的手机号'
+                          }]}
+                    >
+                        <Input />
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 6, span: 16 }}>

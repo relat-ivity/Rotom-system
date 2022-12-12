@@ -1,0 +1,21 @@
+.mainpage{
+    height: 780px;
+}
+
+.logobar{
+    text-align: left;
+}
+
+.logo{
+    float: left;
+    margin-top: 17px;
+    margin-left: 47px;
+}
+
+.logotext{
+    float: left;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ffffff;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
