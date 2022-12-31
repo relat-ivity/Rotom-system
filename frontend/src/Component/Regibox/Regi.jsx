@@ -35,7 +35,7 @@ const Regi = () => {
                     <Form.Item
                         label="用户名"
                         name="username"
-                        rules={[{ required: true, message: '请输入用户名!' }]}
+                        rules={[{ required: true, message: '请输入用户名!' }, { type: 'string', min: 6, message: '用户名至少6位' }]}
                     >
                         <Input />
                     </Form.Item>
@@ -43,15 +43,24 @@ const Regi = () => {
                     <Form.Item
                         label="密码"
                         name="password"
-                        rules={[{ required: true, message: '请输入密码!' }]}
+                        rules={[{ required: true, message: '请输入密码!' }, { type: 'string', min: 6, message: '密码至少6位' }]}
                     >
                         <Input.Password />
                     </Form.Item>
 
                     <Form.Item
                         label="确认密码"
-                        name="password, again"
-                        rules={[{ required: true, message: '请输入密码!' }]}
+                        name="password_again"
+                        rules={[{ required: true, message: '请输入密码!' },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('两次密码不一致'));
+                            },
+                        }),
+                        ]}
                     >
                         <Input.Password />
                     </Form.Item>
@@ -59,11 +68,11 @@ const Regi = () => {
                     <Form.Item
                         label="手机号"
                         name="phonenumber"
-                        rules={[{ required: true, message: '请输入手机号!' },{
+                        rules={[{ required: true, message: '请输入手机号!' }, {
                             required: false,
                             pattern: new RegExp(/^1(3|4|5|6|7|8|9)\d{9}$/, "g"),
                             message: '请输入正确的手机号'
-                          }]}
+                        }]}
                     >
                         <Input />
                     </Form.Item>
