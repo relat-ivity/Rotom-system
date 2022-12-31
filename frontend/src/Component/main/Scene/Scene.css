@@ -22,6 +22,11 @@
     box-shadow: 0 0 5px #1c090946;
 }
 
+.scenecard:active{
+    transform: scale(0.97, 0.97);
+    box-shadow: 0 0 3px #1c090946;
+}
+
 .sceneform{
     width: 500px;
 }
