@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate()
     const onFinish = (values) => {
         console.log('Success:', values);
-        navigate("/main:"+values.username+":"+values.password)
+        navigate("/main/"+values.username+"/"+values.password)
     };
 
     const onFinishFailed = (errorInfo) => {

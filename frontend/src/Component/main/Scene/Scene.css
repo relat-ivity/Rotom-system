@@ -1,0 +1,27 @@
+.page{
+    margin-left: 20px;
+}
+
+.pagetitle{
+    font-size: 25px;
+}
+
+.scenelist{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.scenecard{
+    box-shadow: 0 0 3px #1c090946;
+    width: 200px;
+    margin-top: 10px;
+}
+
+.scenecard:hover{
+    transform: scale(1.03, 1.03);
+    box-shadow: 0 0 5px #1c090946;
+}
+
+.sceneform{
+    width: 500px;
+}

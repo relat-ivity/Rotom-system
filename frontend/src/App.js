@@ -9,7 +9,7 @@ function App() {
       <Router>
           <Routes>
             <Route path='/login/*' element={<LoginPage />} />
-            <Route path='/main:id:password/*' element={<MainPage />} />
+            <Route path='/main/:id/:password/*' element={<MainPage />} />
             <Route path='*' element={<Navigate to="/login" />} />
           </Routes>      
         </Router>

@@ -9,7 +9,7 @@ const ChangePhone = () => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className='page'>
             ChangePhone
         </div>
     )

@@ -1,5 +1,5 @@
 .mainpage{
-    height: 780px;
+    min-height: 780px;
     min-width: 1200px;
 }
 
@@ -19,4 +19,18 @@
     font-size: 20px;
     color: #ffffff;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.pagehead{
+    font-size: 25px;
+    font-family: 'Corbel Light', 'DengXian Light', sans-serif;
+    margin-top: 0;
+    margin-left: 30px;
+    font-weight: 100;
+}
+
+.navi{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
 }

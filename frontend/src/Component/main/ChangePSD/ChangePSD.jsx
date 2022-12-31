@@ -9,7 +9,7 @@ const ChangePSD = () => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className='page'>
             ChangePSD
         </div>
     )

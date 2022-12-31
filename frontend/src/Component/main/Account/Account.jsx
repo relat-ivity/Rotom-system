@@ -9,7 +9,7 @@ const Account = () => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className='page'>
             Account
         </div>
     )

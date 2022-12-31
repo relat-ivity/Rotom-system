@@ -9,7 +9,7 @@ const DrawScene = () => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className='page'>
             DrawScene
         </div>
     )
