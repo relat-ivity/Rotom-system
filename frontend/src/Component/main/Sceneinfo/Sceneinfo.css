@@ -1,0 +1,14 @@
+.devicecard{
+    box-shadow: 0 0 3px #1c090946;
+    width: 200px;
+    margin-top: 10px;
+}
+
+.slider{
+    width: 70px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
