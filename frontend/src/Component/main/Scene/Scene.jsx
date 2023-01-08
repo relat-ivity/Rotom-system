@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './Scene.css'
 import { List, Card, Form, Input, Button } from 'antd';
-import { HomeOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { HomeOutlined, PlusCircleOutlined, HomeTwoTone } from '@ant-design/icons'
 import { SetStateAction, useEffect, useState } from 'react';
 import { HashRouter as Router, Route, Navigate, Routes, useNavigate } from 'react-router-dom'
 
@@ -56,7 +56,7 @@ const Scene = () => {
                 dataSource={scene_data}
                 renderItem={(item) => (
                     <List.Item>
-                        <Card title={item.title} onClick={()=>{navigate(item.title)}} className="scenecard">{item.content}</Card>
+                        <Card title={<div><HomeTwoTone /> {item.title}</div>} onClick={()=>{navigate(item.title)}} className="scenecard">{item.content}</Card>
                     </List.Item>
                 )}
             />

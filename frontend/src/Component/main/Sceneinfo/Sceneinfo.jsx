@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Sceneinfo.css'
 import { List, Card, Form, Input, Button, Switch, Col, InputNumber, Slider, Select } from 'antd';
 import { SetStateAction, useEffect, useState } from 'react';
-import { HomeOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { HomeOutlined, PlusCircleOutlined, BulbTwoTone, LockTwoTone, ControlTwoTone, DashboardTwoTone } from '@ant-design/icons'
 import { HashRouter as Router, Route, Navigate, Routes, useNavigate, useParams } from 'react-router-dom'
 
 const Sceneinfo = () => {
@@ -50,7 +50,7 @@ const Sceneinfo = () => {
     const showcard = (item) => {
         switch (item.content) {
             case '智能灯泡':
-                return <Card title={item.title} onClick={() => { }} className="devicecard"
+                return <Card title={<div><BulbTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
                     actions={[
                         <div><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>,
                         <div>
@@ -63,26 +63,26 @@ const Sceneinfo = () => {
                             />
                         </div>
                     ]}
-                >类型：{item.content}<br />型号：{item.cata}</Card>
+                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '智能开关':
-                return <Card title={item.title} onClick={() => { }} className="devicecard"
+                return <Card title={<div><ControlTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
                     actions={[
                         <div><span style={{ color: 'black' }}>手动开关：</span><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>
                     ]}
-                >类型：{item.content}<br />型号：{item.cata}</Card>
+                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '传感器':
-                return <Card title={item.title} onClick={() => { }} className="devicecard"
+                return <Card title={<div><DashboardTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
                     actions={[
                         <div><span style={{ color: 'black' }}>温度：{item.value1}℃</span></div>,
                         <div><span style={{ color: 'black' }}>湿度：{item.value2}%</span></div>
                     ]}
-                >类型：{item.content}<br />型号：{item.cata}</Card>
+                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '智能门锁':
-                return <Card title={item.title} onClick={() => { }} className="devicecard"
+                return <Card title={<div><LockTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
                     actions={[
                         <div><span style={{ color: 'black' }}>状态：{item.value1 ? '开' : '关'}</span></div>
                     ]}
-                >类型：{item.content}<br />型号：{item.cata}</Card>
+                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
         }
     }
 

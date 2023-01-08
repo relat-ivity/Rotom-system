@@ -15,7 +15,6 @@ import Scene from '../../Component/main/Scene/Scene'
 import DrawScene from '../../Component/main/DrawScene/DrawScene'
 import ChangePSD from '../../Component/main/ChangePSD/ChangePSD'
 import ChangePhone from '../../Component/main/ChangePhone/ChangePhone'
-import Account from '../../Component/main/Account/Account'
 import Sceneinfo from '../../Component/main/Sceneinfo/Sceneinfo';
 
 const { Header, Sider, Content } = Layout;
@@ -55,10 +54,7 @@ const MainPage = () => {
                 key: 'accountcenter',
                 icon: <UploadOutlined />,
                 label: '个人账号中心',
-                children: [{
-                  key: 'account',
-                  label: '账户信息',
-                },
+                children: [
                 {
                   key: 'changePSD',
                   label: '修改密码',
@@ -94,7 +90,6 @@ const MainPage = () => {
             <Route path='drawScene' element={<DrawScene />} />
             <Route path='changePSD' element={<ChangePSD />} />
             <Route path='changePhone' element={<ChangePhone />} />
-            <Route path='account' element={<Account />} />
             <Route path='*' element={<Navigate to='scene' />} />
           </Routes>
         </Content>
