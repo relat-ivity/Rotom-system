@@ -15,6 +15,7 @@
     box-shadow: 0 0 3px #1c090946;
     width: 200px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .scenecard:hover{

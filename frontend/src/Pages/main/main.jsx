@@ -3,19 +3,11 @@ import { SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios'
 import './main.css'
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
+  MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { useNavigate, HashRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
-import Scene from '../../Component/main/Scene/Scene'
-import DrawScene from '../../Component/main/DrawScene/DrawScene'
-import ChangePSD from '../../Component/main/ChangePSD/ChangePSD'
-import ChangePhone from '../../Component/main/ChangePhone/ChangePhone'
-import Sceneinfo from '../../Component/main/Sceneinfo/Sceneinfo';
+import { Scene, DrawScene, ChangePSD, ChangePhone, Sceneinfo, Scenepic } from "../../Component/main"
+
 
 const { Header, Sider, Content } = Layout;
 
@@ -48,7 +40,7 @@ const MainPage = () => {
               {
                 key: 'drawScene',
                 icon: <VideoCameraOutlined />,
-                label: '手动绘制场景',
+                label: '场景可视化',
               },
               {
                 key: 'accountcenter',
@@ -85,7 +77,8 @@ const MainPage = () => {
           }}
         >
           <Routes>
-          <Route path='scene/:scenename' element={<Sceneinfo />} />
+            <Route path='scene/:scenename' element={<Sceneinfo />} />
+            <Route path='drawscene/:scenename' element={<Scenepic />} />
             <Route path='scene' element={<Scene />} />
             <Route path='drawScene' element={<DrawScene />} />
             <Route path='changePSD' element={<ChangePSD />} />
