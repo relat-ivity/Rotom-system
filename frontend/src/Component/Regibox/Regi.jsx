@@ -1,14 +1,34 @@
 import React from 'react'
 import axios from 'axios'
 import './Regi.css'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import { SetStateAction, useEffect, useState } from 'react';
 import { HashRouter as Router, Route, Navigate, Routes, useNavigate } from 'react-router-dom'
 
 const Regi = () => {
     const navigate = useNavigate()
+    const [messageApi, contextHolder] = message.useMessage();
     const onFinish = (values) => {
-        console.log('Success:', values);
+        axios.get('http://localhost:8000/regin' ,{
+              params: {
+                username: values.username,
+                password: values.password,
+                phonenumber: values.phonenumber,
+              }
+              
+            }).then((response)=>{
+              const code=response.data.status;
+              console.log(code);
+              if(code=="1"){
+                alert("注册成功")
+              }
+              else{
+                alert('用户名已存在')
+              }
+            }).catch(function (error){
+                console.log(error);
+              }
+            )
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -35,7 +55,9 @@ const Regi = () => {
                     <Form.Item
                         label="用户名"
                         name="username"
-                        rules={[{ required: true, message: '请输入用户名!' }, { type: 'string', min: 6, message: '用户名至少6位' }]}
+                        rules={[{ required: true, message: '请输入用户名!' }, 
+                                    { type: 'string', min: 6, message: '用户名至少6位' },  
+                                    { type: 'string', max: 16, message: '用户名最多16位' }]}
                     >
                         <Input />
                     </Form.Item>
@@ -43,7 +65,9 @@ const Regi = () => {
                     <Form.Item
                         label="密码"
                         name="password"
-                        rules={[{ required: true, message: '请输入密码!' }, { type: 'string', min: 6, message: '密码至少6位' }]}
+                        rules={[{ required: true, message: '请输入密码!' }, 
+                                    { type: 'string', min: 6, message: '密码至少6位' },
+                                    { type: 'string', max: 16, message: '密码最多16位' },]}
                     >
                         <Input.Password />
                     </Form.Item>

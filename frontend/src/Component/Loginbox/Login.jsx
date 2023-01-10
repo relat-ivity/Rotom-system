@@ -1,16 +1,32 @@
 import React from 'react'
 import axios from 'axios'
 import './Login.css'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import { SetStateAction, useEffect, useState } from 'react';
 import { HashRouter as Router, Route, Navigate, Routes, useNavigate } from 'react-router-dom'
 import Password from 'antd/es/input/Password';
 
 const Login = () => {
     const navigate = useNavigate()
+    const [messageApi, contextHolder] = message.useMessage();
     const onFinish = (values) => {
         console.log('Success:', values);
-        navigate("/main/"+values.username+"/"+values.password)
+        axios.get('http://localhost:8000/login', {
+            params: {
+                username: values.username,
+                password: values.password
+            },
+        }).then((response) => {
+            const code = response.data.status;
+            if (code == "1") {
+                navigate("/main/" + values.username + "/" + values.password)
+            }
+            else {
+                alert('用户名或密码错误');
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -20,7 +36,7 @@ const Login = () => {
     return (
         <div className='formbox'>
             <div className='loghead'>
-                <img src="pic/lotomu.png" width={100}/> 
+                <img src="pic/lotomu.png" width={100} />
                 <p>Rotom智能家居管理系统</p>
             </div>
             <Form className='logform'
@@ -56,7 +72,7 @@ const Login = () => {
                     <Button type="primary" htmlType="submit" >
                         登录
                     </Button>
-                    <Button type="link" htmlType="button" onClick={() => {navigate('regi')}}>
+                    <Button type="link" htmlType="button" onClick={() => { navigate('regi') }}>
                         注册
                     </Button>
                 </Form.Item>
