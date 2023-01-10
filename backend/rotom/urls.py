@@ -14,4 +14,8 @@ urlpatterns = [
     path('device/', views.device, name='device'),
     path('adddevice/', views.adddevice, name='device'),
     path('deletedevice/', views.deletedevice, name='deletedevice'),
+    path('drawscene/', views.drawscene, name='drawscene'),
+    path('scenepic/', views.scenepic, name='scenepic'),
+    path('updatepic/', views.updatepic, name='updatepic'),
+
 ]

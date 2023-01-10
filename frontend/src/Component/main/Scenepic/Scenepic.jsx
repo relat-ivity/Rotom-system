@@ -13,41 +13,35 @@ const Scenepic = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [picaddr, setpicaddr] = useState('');
-    const [device_data, setdevice] = useState([
-        {
-            title: '灯泡一',
-            content: '智能灯泡',
-            cata: '华为灯泡',
-            value1: 1,
-            value2: 40,
-        },
-        {
-            title: '灯泡二',
-            content: '智能灯泡',
-            cata: '华为灯泡',
-            value1: 1,
-            value2: 50,
-        },
-        {
-            title: '小米开关',
-            content: '智能开关',
-            cata: '小米开关',
-            value1: 1,
-        },
-        {
-            title: '小米传感器',
-            content: '传感器',
-            cata: '华为温度传感器',
-            value1: 26,
-            value2: 20
-        },
-        {
-            title: '小米门锁',
-            content: '智能门锁',
-            cata: '小米门锁',
-            value1: 0,
-        },
-    ]);
+    const [device_data, setdevice] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/device", {
+            params: {
+                user: params.id,
+                scene: params.scenename,
+            },
+        }).then((response) => {
+            const devicelist = JSON.parse(response.data).devicelist;
+            for (let i = 0; i < devicelist.length; i++) {
+                devicelist[i].value1 = parseInt(devicelist[i].value1str)
+                devicelist[i].value2 = parseInt(devicelist[i].value2str)
+            }
+            setdevice(devicelist)
+        }).catch(function (error) {
+            console.log(error);
+        });
+        axios.get("http://localhost:8000/scenepic", {
+            params: {
+                user: params.id,
+                scene: params.scenename,
+            },
+        }).then((response) => {
+            setpicaddr(JSON.parse(response.data).pic)
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, [])
 
     const props = {
         beforeUpload: (file) => {
@@ -58,18 +52,33 @@ const Scenepic = () => {
             return isPNG || Upload.LIST_IGNORE;
         },
         onChange: (info) => {
-            console.log(info.fileList[0]);
             const file = info.fileList[0].originFileObj;
+            console.log(file)
             if (file) {
                 var reader = new FileReader();
                 reader.onload = (event) => {
-                    console.log(reader.result);
                     setpicaddr(reader.result)
+                    axios.post("http://localhost:8000/updatepic/", {
+                        data: {
+                            user: params.id,
+                            title: params.scenename,
+                            pic: picaddr
+                        },
+                        headers: {
+                            "Content-type": "application/json",
+                        },
+                    },
+                    ).then((response) => {
+                        const result = response.data.status;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
                 };
             }
             reader.readAsDataURL(file);
         },
         maxCount: 1,
+        showUploadList: false,
     };
 
 
@@ -98,7 +107,7 @@ const Scenepic = () => {
                 <Upload {...props}>
                     <Button icon={<UploadOutlined />}>选择背景图片</Button>
                 </Upload>
-                <Button type="primary" className='button1'>上传</Button>
+
             </div>
             <h2> · 场景可视化</h2>
             <Image id='leftpic'

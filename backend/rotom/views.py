@@ -183,3 +183,55 @@ def deletedevice(request):
         cursor.close()
         conn.close()
         return JsonResponse({"status": "0"})
+
+def drawscene(request):
+    conn = pymysql.connect(host="127.0.0.1", user="root", password=DB_password, database="rotom")
+    cursor = conn.cursor()
+    user = request.GET.get('user')
+    sql = "select title,scene_pic from rotom_sceneinfo " \
+          "where user = %s "
+    cursor.execute(sql, user)
+    result = cursor.fetchall()
+    if len(result) != 0:
+        searchTable = []
+        for i in range(0, len(result)):
+            small_list = {
+                "title": result[i][0],
+                "pic": result[i][1]
+            }
+            searchTable.append(small_list)
+        data = {
+            'scenelist': searchTable
+        }
+        result = JsonResponse(json.dumps(data), safe=False)
+        return result
+    cursor.close()
+    conn.close()
+    return JsonResponse(json.dumps({'scenelist':[]}),safe=False)
+
+def scenepic(request):
+    conn = pymysql.connect(host="127.0.0.1", user="root", password=DB_password, database="rotom")
+    cursor = conn.cursor()
+    user = request.GET.get('user')
+    scene = request.GET.get('scene')
+    sql = "select scene_pic from rotom_sceneinfo where user ='"+user+"' and title='"+scene+"'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return JsonResponse(json.dumps({'pic':result[0][0]}),safe=False)
+
+def updatepic(request):
+    conn = pymysql.connect(host="127.0.0.1", user="root", password=DB_password, database="rotom")
+    cursor = conn.cursor()
+    jsondata=json.loads(request.body,strict=False)
+    title = jsondata.get('data').get('title')
+    user = jsondata.get('data').get('user')
+    pic = jsondata.get('data').get('pic')
+    sql = "update rotom_sceneinfo set scene_pic='"+pic+"' where title="+"'"+title+"' and user='"+user+"'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return JsonResponse({"status": "1"})

@@ -1,0 +1,16 @@
+.drawcard{
+    box-shadow: 0 0 3px #1c090946;
+    width: 200px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.drawcard:hover{
+    transform: scale(1.03, 1.03);
+    box-shadow: 0 0 5px #1c090946;
+}
+
+.drawcard:active{
+    transform: scale(0.97, 0.97);
+    box-shadow: 0 0 3px #1c090946;
+}
