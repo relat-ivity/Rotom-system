@@ -2,8 +2,7 @@ import React from 'react'
 import { SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios'
 import './main.css'
-import {
-  MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { useNavigate, HashRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
 import { Scene, DrawScene, ChangePSD, ChangePhone, Sceneinfo, Scenepic } from "../../Component/main"

@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './Sceneinfo.css'
-import { List, Card, Form, Input, Button, Switch, Col, InputNumber, Slider, Select } from 'antd';
+import { List, Card, Form, Input, Button, Switch, Col, InputNumber, Slider, Select, Popconfirm } from 'antd';
 import { SetStateAction, useEffect, useState } from 'react';
 import { HomeOutlined, PlusCircleOutlined, BulbTwoTone, LockTwoTone, ControlTwoTone, DashboardTwoTone } from '@ant-design/icons'
 import { HashRouter as Router, Route, Navigate, Routes, useNavigate, useParams } from 'react-router-dom'
@@ -10,92 +10,183 @@ const Sceneinfo = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [device_data, setdevice] = useState([
-        {
-            title: '灯泡一',
-            content: '智能灯泡',
-            cata: '华为灯泡',
-            value1: 1,
-            value2: 50,
-        },
-        {
-            title: '灯泡二',
-            content: '智能灯泡',
-            cata: '华为灯泡',
-            value1: 1,
-            value2: 50,
-        },
-        {
-            title: '开关三',
-            content: '智能开关',
-            cata: '小米开关',
-            value1: 1,
-        },
-        {
-            title: '传感器',
-            content: '传感器',
-            cata: '华为温度传感器',
-            value1: 26,
-            value2: 20
-        },
-        {
-            title: '门锁',
-            content: '智能门锁',
-            cata: '小米门锁',
-            value1: 0,
-        },
     ]);
 
-    useEffect(() => { console.log(device_data) }, [])
+    useEffect(()=>{
+        axios.get("http://localhost:8000/device",{
+            params: {
+                user: params.id,
+                scene: params.scenename,
+            },
+        }).then((response)=>{
+            const devicelist=JSON.parse(response.data).devicelist;
+            for(let i=0;i<devicelist.length;i++){
+                devicelist[i].value1=parseInt(devicelist[i].value1str)
+                devicelist[i].value2=parseInt(devicelist[i].value2str)
+            }
+            setdevice(devicelist)
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },[])
+
+    const deletedevice = (title) => {
+        console.log(params)
+        console.log(title)
+        let temp=device_data;
+        temp=temp.filter(item => item.title != title)
+        temp=[...temp]
+        setdevice(temp)
+        axios.get("http://localhost:8000/deletedevice",{
+            params: {
+                title: title,
+                user: params.id,
+                scene: params.scenename,
+            },
+        }).then((response)=>{
+            const result=response.data.status;
+            console.log(result)
+            alert("删除成功")
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+
 
     const showcard = (item) => {
         switch (item.content) {
             case '智能灯泡':
                 return <Card title={<div><BulbTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
-                    actions={[
-                        <div><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>,
-                        <div>
-                            <Slider
-                                min={20}
-                                max={100}
-                                className='slider'
-                                onChange={(value) => { item.value2 = value; let temp = device_data; temp = [...temp]; setdevice(temp) }}
-                                value={item.value2}
-                            />
-                        </div>
-                    ]}
-                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
+                                extra={<Popconfirm
+                                    placement="topRight"
+                                    title="确认删除此设备吗？"
+                                    onConfirm={()=>deletedevice(item.title)}
+                                    okText="是"
+                                    cancelText="否"
+                                ><a>删除</a></Popconfirm>}
+                                actions={[
+                                    <div><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>,
+                                    <div>
+                                        <Slider
+                                            min={20}
+                                            max={100}
+                                            className='slider'
+                                            onChange={(value) => { item.value2 = value; let temp = device_data; temp = [...temp]; setdevice(temp) }}
+                                            value={item.value2}
+                                        />
+                                    </div>
+                                ]}
+                            >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '智能开关':
                 return <Card title={<div><ControlTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
-                    actions={[
-                        <div><span style={{ color: 'black' }}>手动开关：</span><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>
-                    ]}
-                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
+                                extra={<Popconfirm
+                                    placement="topRight"
+                                    title="确认删除此设备吗？"
+                                    onConfirm={()=>deletedevice(item.title)}
+                                    okText="是"
+                                    cancelText="否"
+                                ><a>删除</a></Popconfirm>}
+                                actions={[
+                                    <div><span style={{ color: 'black' }}>手动开关：</span><Switch onChange={() => { item.value1 = !(item.value1) }} /></div>
+                                ]}
+                            >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '传感器':
                 return <Card title={<div><DashboardTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
-                    actions={[
-                        <div><span style={{ color: 'black' }}>温度：{item.value1}℃</span></div>,
-                        <div><span style={{ color: 'black' }}>湿度：{item.value2}%</span></div>
-                    ]}
-                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
+                                extra={<Popconfirm
+                                    placement="topRight"
+                                    title="确认删除此设备吗？"
+                                    onConfirm={()=>deletedevice(item.title)}
+                                    okText="是"
+                                    cancelText="否"
+                                ><a>删除</a></Popconfirm>}
+                                actions={[
+                                    <div><span style={{ color: 'black' }}>温度：{item.value1}℃</span></div>,
+                                    <div><span style={{ color: 'black' }}>湿度：{item.value2}%</span></div>
+                                ]}
+                            >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
             case '智能门锁':
                 return <Card title={<div><LockTwoTone /> {item.title}</div>} onClick={() => { }} className="devicecard"
-                    actions={[
-                        <div><span style={{ color: 'black' }}>状态：{item.value1 ? '开' : '关'}</span></div>
-                    ]}
-                >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
+                                extra={<Popconfirm
+                                    placement="topRight"
+                                    title="确认删除此设备吗？"
+                                    onConfirm={()=>deletedevice(item.title)}
+                                    okText="是"
+                                    cancelText="否"
+                                ><a>删除</a></Popconfirm>}
+                                actions={[
+                                    <div><span style={{ color: 'black' }}>状态：{item.value1 ? '开' : '关'}</span></div>
+                                ]}
+                            >类型：<strong>{item.content}</strong><br />型号：{item.cata}</Card>
         }
     }
 
     const onFinish = (values) => {
-        console.log('Success:', values);
-        let temp = device_data;
-        temp.push({
-            title: values.devicename,
-            content: values.type,
-            cata: values.devicecata,
-        })
-        temp = [...temp]
-        setdevice(temp)
+        let temp=device_data;
+        const search = temp.filter(item=>item.title==values.devicename)
+        if(search.length!=0){
+            alert("命名重复")
+            return;
+        }
+        if(values.type=='传感器')
+        {
+            temp.push({
+                title: values.devicename,
+                content: values.type,
+                cata: values.devicecata,
+                value1: 26,
+                value2: 30,
+            })
+            temp=[...temp]
+            setdevice(temp)
+            axios.get("http://localhost:8000/adddevice",{
+                params: {
+                    title: values.devicename,
+                    content: values.type,
+                    cata: values.devicecata,
+                    value1: 26,
+                    value2: 30,
+                    user: params.id,
+                    scene: params.scenename,
+                },
+            }).then((response)=>{
+                const result=response.data.status;
+                console.log(result)
+                alert("添加成功")
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+        else
+        {
+            temp.push({
+                title: values.devicename,
+                content: values.type,
+                cata: values.devicecata,
+                value1: 0,
+                value2: 50,
+            })
+            temp=[...temp]
+            setdevice(temp)
+            console.log(device_data)
+            axios.get("http://localhost:8000/adddevice",{
+                params: {
+                    title: values.devicename,
+                    content: values.type,
+                    cata: values.devicecata,
+                    value1: 0,
+                    value2: 50,
+                    user: params.id,
+                    scene: params.scenename,
+                },
+            }).then((response)=>{
+                const result=response.data.status;
+                console.log(result)
+                alert("添加成功")
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     };
 
     const onFinishFailed = (errorInfo) => {

@@ -2,6 +2,14 @@
     margin-left: 20px;
 }
 
+.cardtitle{
+    color:black
+}
+
+.cardtitle:hover{
+    color:rgba(0, 0, 0, 0.439)
+}
+
 .pagetitle{
     font-size: 25px;
 }
@@ -15,18 +23,8 @@
     box-shadow: 0 0 3px #1c090946;
     width: 200px;
     margin-top: 10px;
-    cursor: pointer;
 }
 
-.scenecard:hover{
-    transform: scale(1.03, 1.03);
-    box-shadow: 0 0 5px #1c090946;
-}
-
-.scenecard:active{
-    transform: scale(0.97, 0.97);
-    box-shadow: 0 0 3px #1c090946;
-}
 
 .sceneform{
     width: 500px;
