@@ -230,6 +230,7 @@ def updatepic(request):
     pic = jsondata.get('data').get('pic')
     sql = "update rotom_sceneinfo set scene_pic='"+pic+"' where title="+"'"+title+"' and user='"+user+"'"
     cursor.execute(sql)
+    print(sql[:300])
     result = cursor.fetchall()
     conn.commit()
     cursor.close()

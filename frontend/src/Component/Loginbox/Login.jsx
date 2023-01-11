@@ -19,7 +19,8 @@ const Login = () => {
         }).then((response) => {
             const code = response.data.status;
             if (code == "1") {
-                navigate("/main/" + values.username + "/" + values.password)
+                sessionStorage[values.username] = values.password;
+                navigate("/main/" + values.username)
             }
             else {
                 alert('用户名或密码错误');

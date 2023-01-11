@@ -4,7 +4,7 @@ import axios from 'axios'
 import './main.css'
 import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import { useNavigate, HashRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
+import { useNavigate, HashRouter as Router, Route, Navigate, Routes, useParams } from 'react-router-dom';
 import { Scene, DrawScene, ChangePSD, ChangePhone, Sceneinfo, Scenepic } from "../../Component/main"
 
 
@@ -12,10 +12,18 @@ const { Header, Sider, Content } = Layout;
 
 const MainPage = () => {
   const navigate = useNavigate()
+  const params = useParams()
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+
+ useEffect(()=>{
+  console.log(sessionStorage)
+    if(!sessionStorage[params.id]){
+      navigate("/login")
+    }
+ },[]) 
 
   return (
     <Layout className='mainpage'>

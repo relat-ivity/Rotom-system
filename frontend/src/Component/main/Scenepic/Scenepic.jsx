@@ -53,7 +53,6 @@ const Scenepic = () => {
         },
         onChange: (info) => {
             const file = info.fileList[0].originFileObj;
-            console.log(file)
             if (file) {
                 var reader = new FileReader();
                 reader.onload = (event) => {
@@ -62,7 +61,7 @@ const Scenepic = () => {
                         data: {
                             user: params.id,
                             title: params.scenename,
-                            pic: picaddr
+                            pic: reader.result
                         },
                         headers: {
                             "Content-type": "application/json",
@@ -74,12 +73,16 @@ const Scenepic = () => {
                         console.log(error);
                     });
                 };
+                reader.readAsDataURL(file);
+                
+
             }
-            reader.readAsDataURL(file);
         },
         maxCount: 1,
         showUploadList: false,
     };
+
+    
 
 
     const showcard = (item) => {
@@ -107,7 +110,6 @@ const Scenepic = () => {
                 <Upload {...props}>
                     <Button icon={<UploadOutlined />}>选择背景图片</Button>
                 </Upload>
-
             </div>
             <h2> · 场景可视化</h2>
             <Image id='leftpic'
