@@ -19,7 +19,6 @@ const MainPage = () => {
 
 
  useEffect(()=>{
-  console.log(sessionStorage)
     if(!sessionStorage[params.id]){
       navigate("/login")
     }

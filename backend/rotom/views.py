@@ -230,7 +230,45 @@ def updatepic(request):
     pic = jsondata.get('data').get('pic')
     sql = "update rotom_sceneinfo set scene_pic='"+pic+"' where title="+"'"+title+"' and user='"+user+"'"
     cursor.execute(sql)
-    print(sql[:300])
+    result = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return JsonResponse({"status": "1"})
+
+def updatepsd(request):
+    conn = pymysql.connect(host="127.0.0.1", user="root", password=DB_password, database="rotom")
+    cursor = conn.cursor()
+    username = request.GET.get('username')
+    password = request.GET.get('password')
+    new_password = request.GET.get('new_password')
+    sql = "select username from rotom_user where username='"+username+"' and password='"+password+"'"
+    cursor.execute(sql)
+    print(sql)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return JsonResponse({"status": "0"})
+    sql = "update rotom_user set password='"+new_password+"' where username='"+username+"'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return JsonResponse({"status": "1"})
+
+def updatephone(request):
+    conn = pymysql.connect(host="127.0.0.1", user="root", password=DB_password, database="rotom")
+    cursor = conn.cursor()
+    username = request.GET.get('username')
+    password = request.GET.get('password')
+    phonenumber = request.GET.get('phonenumber')
+    sql = "select username from rotom_user where username='"+username+"' and password='"+password+"'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    if len(result) == 0:
+        return JsonResponse({"status": "0"})
+    sql = "update rotom_user set phonenumber='"+phonenumber+"' where username='"+username+"'"
+    cursor.execute(sql)
     result = cursor.fetchall()
     conn.commit()
     cursor.close()

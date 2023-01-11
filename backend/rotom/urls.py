@@ -17,5 +17,7 @@ urlpatterns = [
     path('drawscene/', views.drawscene, name='drawscene'),
     path('scenepic/', views.scenepic, name='scenepic'),
     path('updatepic/', views.updatepic, name='updatepic'),
+    path('updatepsd/', views.updatepsd, name='updatepsd'),
+    path('updatephone/', views.updatephone, name='updatephone'),
 
 ]

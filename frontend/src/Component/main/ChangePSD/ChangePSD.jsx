@@ -4,12 +4,31 @@ import './ChangePSD.css'
 import { Button, Checkbox, Form, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons'
 import { SetStateAction, useEffect, useState } from 'react';
-import { HashRouter as Router, Route, Navigate, Routes, useNavigate } from 'react-router-dom'
+import { HashRouter as Router, Route, Navigate, Routes, useNavigate, useParams } from 'react-router-dom'
 
 const ChangePSD = () => {
     const navigate = useNavigate()
+    const params = useParams()
     const onFinish = (values) => {
         console.log('Success:', values);
+        axios.get('http://localhost:8000/updatepsd' ,{
+              params: {
+                username: params.id,
+                password: values.password_now,
+                new_password: values.password
+              }
+            }).then((response)=>{
+              const code=response.data.status;
+              if(code=="1"){
+                alert("修改成功")
+              }
+              else{
+                alert('密码错误')
+              }
+            }).catch(function (error){
+                console.log(error);
+              }
+            )
     };
 
     const onFinishFailed = (errorInfo) => {
