@@ -22,8 +22,11 @@ const Regi = () => {
               if(code=="1"){
                 alert("注册成功")
               }
-              else{
+              else if(code=="0"){
                 alert('用户名已存在')
+              }
+              else{
+                alert('一个手机号只能注册一个用户')
               }
             }).catch(function (error){
                 console.log(error);

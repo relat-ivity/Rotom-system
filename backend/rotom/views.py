@@ -21,6 +21,12 @@ def regin(request):
     result=cursor.fetchall()
     if len(result)!=0:
         return JsonResponse({"status":"0"})
+    sql = 'select username from rotom_user ' \
+          'where phonenumber=%s'
+    cursor.execute(sql, phonenumber)
+    result = cursor.fetchall()
+    if len(result) != 0:
+        return JsonResponse({"status": "-1"})
     sql = 'select* from rotom_user'
     cursor.execute(sql)
     result = cursor.fetchall()

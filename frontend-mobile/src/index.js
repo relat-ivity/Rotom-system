@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-export const base_url="http://192.168.1.8:8000"
+export const base_url="http://localhost:8000"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
