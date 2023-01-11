@@ -82,6 +82,7 @@ const MainPage = () => {
               className: 'trigger',
               onClick: () => setisshow(!isshow),
             })}</h2>
+            <h2 className='pagehead'>Rotom智能家居管理系统</h2>
         </Header>
         <Content
           className='maincontent'

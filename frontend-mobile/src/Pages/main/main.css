@@ -16,6 +16,7 @@
 .logo2{
     margin-top: 17px;
     margin-left: 26px;
+    margin-bottom: 30px;
 }
 
 .logotext{
@@ -44,4 +45,15 @@
 
 .mainmain{
     min-height:  430px;
+}
+
+.pagehead{
+    float: left;
+    position: relative;
+    top:-22px;
+    font-size: 25px;
+    font-family: 'Corbel Light', 'DengXian Light', sans-serif;
+    margin-top: 0;
+    margin-left: 5px;
+    font-weight: 300;
 }
