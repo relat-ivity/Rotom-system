@@ -11,7 +11,7 @@
 
 PC端前端：http://localhost:3000
 
-手机端前端：http://localhost:9000
+手机端前端：http://localhost:9000（修改请求基地址在```src/index.js```中修改```base_url```）
 
 后端：http://localhost:8000
 
@@ -39,7 +39,23 @@ py manage.py runserver
 
 
 
-#### 图片
+#### 界面
 
 ![](pic/1.png)
+
+
+
+![](pic/2.png)
+
+
+
+![](pic/3.png)
+
+
+
+![](pic/4.png)
+
+
+
+![](pic/5.png)
 
