@@ -1,0 +1,47 @@
+.mainpage{
+    min-width:400;
+    width: max-content;
+}
+
+.logobar{
+    text-align: left;
+}
+
+.logo{
+    float: left;
+    margin-top: 17px;
+    margin-left: 47px;
+}
+
+.logo2{
+    margin-top: 17px;
+    margin-left: 26px;
+}
+
+.logotext{
+    float: left;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ffffff;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.trigger{
+    float: left;
+    margin-left: 10px;
+}
+
+.navi{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
+.site-layout{
+    min-width: 340px;
+}
+
+
+.mainmain{
+    min-height:  430px;
+}

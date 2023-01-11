@@ -1,0 +1,25 @@
+.upload{
+    width: 400px;
+}
+
+.button1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.piccard{
+    cursor: pointer;
+    font-size: 8px;
+    background-color: white;
+}
+
+.piclist{
+    width:150px
+}
+
+#leftpic{
+}
+
+#rightpic{
+    margin-top:20px
+}

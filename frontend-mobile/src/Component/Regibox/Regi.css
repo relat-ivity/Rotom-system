@@ -1,0 +1,9 @@
+.regiform{
+    padding-left: 30px;
+    position: relative;
+    top:-75px;
+    transform: scale(0.72, 0.72);
+    width: 280px;
+    text-align: left;
+    overflow: hidden;
+}

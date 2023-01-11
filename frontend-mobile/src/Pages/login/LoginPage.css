@@ -1,0 +1,20 @@
+.loginpage{
+    background: url("pic/back.jpg");
+    background-size:100% 100%;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.logbox{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:100px;
+    margin-bottom:220px;
+    box-shadow: 10px,10px,10px;
+    height: 400px;
+    width: 300px;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.852);
+    overflow: hidden;
+}
